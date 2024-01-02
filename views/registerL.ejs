@@ -1,0 +1,34 @@
+<%- include("partials/header"); %>
+
+<h1>Register as a Lawyer</h1>
+
+<body>
+    <div class="center">
+      <h1 class="login">Register</h1>
+      <form method="POST">
+        <div class="txt_field">
+          <input type="text" id="name" name="name" required>
+          <span></span>
+          <label for="name">Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="email" id="email" name="email" required>
+          <span></span>
+          <label for="email">Email</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" id="password" name="password" required>
+            <span></span>
+            <label for="password">Password</label>
+          </div>
+        <input type="submit" value="Register">
+        <div class="signup_link">
+            <a href="/login"></a>
+        </div>
+      </form>
+    </div>
+  </body>
+
+
+    
+<%- include("partials/footer"); %>
