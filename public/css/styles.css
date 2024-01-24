@@ -44,6 +44,7 @@ header a:hover {
     display: flex;
     justify-content: flex-end;
     padding: 0;
+    margin-top: 50px;
   }
   
   .navb a {
@@ -111,7 +112,17 @@ header a:hover {
   }
 
   .logo{
-    height: 45px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    padding-left: 15px;
+  }
+
+  .bgimage{
+    height: 78%;
+    width: 85%;
+    z-index: -2;
+    position: fixed;
   }
 
   .footer-padding {
@@ -235,4 +246,17 @@ header a:hover {
   }
   .signup_link a:hover{
     text-decoration: underline;
+  }
+
+  .textf{
+    z-index: 0;
+    position: absolute;
+    width: 85%;
+    color: #F9FBE7;
+  }
+
+  .nib{
+    position: fixed;
+    top: 0;
+    width: 100%
   }

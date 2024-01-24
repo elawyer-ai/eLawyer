@@ -90,12 +90,13 @@ app.get("/", checkAuthenticated, function(req,res){
     try{
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       users.push({
-        id: Date.now().toString(),
+        id: Date.now().toString(), 
         name: req.body.name,
         email: req.body.email,
         password: hashedPassword
       });
       res.redirect("/login");
+      return
     }
     catch{
       res.redirect("/registerL");
