@@ -34,59 +34,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", checkAuthenticated, function(req,res){
-    res.render("home");
-  });
+app.use('/', require('./routes/index'));
+app.use('/', require('./routes/users'));
 
 
-  app.get("/team", function(req,res){
-    res.render("team");
-  });
-
-
-  app.get("/about", function(req,res){
-    res.render("about");
-  });
-
-
-  app.get("/blog", function(req,res){
-    res.render("blog");
-  });
-
-
-  app.get("/student", function(req,res){
-    res.render("student");
-  });
-
-
-  app.get("/login", checkNotAuthenticated, function(req,res){
-    res.render("login");
-  });
-
-
-  app.get("/registerC", function(req,res){
-    res.render("registerC");
-  });
-
-
-  app.get("/registerL", checkNotAuthenticated, function(req,res){
-    res.render("registerL");
-  });
-
-
-  app.get("/family", function(req,res){
-    res.render("family");
-  });
-
-
-  app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  app.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
   }));
 
 
-  app.post("/registerL", checkNotAuthenticated, async (req,res) => {
+  app.post("/registerL", async (req,res) => {
     try{
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       users.push({
@@ -103,22 +62,6 @@ app.get("/", checkAuthenticated, function(req,res){
     }
     console.log(users);
   });
-
- 
-  function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-  
-    res.redirect('/login');
-  }
-  
-  function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return res.redirect('/');
-    }
-    next();
-  }
 
  
 app.listen(3000, function() {
