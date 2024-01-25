@@ -1,79 +1,84 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica;
 }
 
 header {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 10px 20px 0 20px;
-    background-color: #190482; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px 0 20px;
+  background-color: #190482;
 }
 
 #nav-title {
-    margin-right: auto;
-    font-size: 1.5em;
+  margin-right: auto;
+  font-size: 1.5em;
 }
 
 header li {
-    list-style: none;
-    display: inline-block;
-    padding: 0 20px;
-    color: white;
+  list-style: none;
+  display: inline-block;
+  padding: 0 20px;
+  color: white;
 }
 
 header a {
-    text-decoration: none;
-    color: white;
-    padding-left: 5px;
-    /* transition: all 0.3s ease 0s; */
+  text-decoration: none;
+  color: white;
+  padding-left: 5px;
+  /* transition: all 0.3s ease 0s; */
 }
 
 header a:hover {
-    /* color: #b2dfdb; */
-    text-decoration: underline;
+  /* color: #b2dfdb; */
+  text-decoration: underline;
 }
 
-  .imgTop{
-    height: 20px;
-  }
+.imgTop {
+  height: 20px;
+}
 
-  .img{
-    height: 35px;
-    padding-top: 10px;
-  }
+.img {
+  height: 35px;
+  padding-top: 10px;
+}
 
-  .logo{
-    height: 30px;
-    position: absolute;
-    left: 0;
-    padding-left: 15px;
-  }
+.logo {
+  height: 30px;
+  position: absolute;
+  left: 0;
+  padding-left: 15px;
+}
 
-  .bgimage{
-    height: 78%;
-    width: 85%;
-    z-index: -2;
-    position: fixed;
-  }
+.bgimage {
+  height: 78%;
+  width: 85%;
+  z-index: -2;
+  position: fixed;
+}
 
-  .textf{
-    z-index: 0;
-    position: absolute;
-    width: 85%;
-    color: #F9FBE7;
-  }
+.textf {
+  z-index: 0;
+  position: absolute;
+  width: 85%;
+  color: #f9fbe7;
+}
 
-  .nib{
-    position: fixed;
-    top: 0;
-    width: 100%
-  }
+.textf p{
+  font-family: 'Oranienbaum', serif;
+}
 
-  .heads{
-    text-align: center;
-    padding-top: 3%;
-    color: #F9FBE7; 
-  }
+.nib {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.headings {
+  text-align: center;
+  padding-top: 3%;
+  color: #f9fbe7;
+  font-family: 'EB Garamond', serif;
+}
