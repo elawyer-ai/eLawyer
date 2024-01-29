@@ -4,38 +4,6 @@
   font-family: Arial, Helvetica;
 }
 
-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 20px 0 20px;
-  background-color: #190482;
-}
-
-#nav-title {
-  margin-right: auto;
-  font-size: 1.5em;
-}
-
-header li {
-  list-style: none;
-  display: inline-block;
-  padding: 0 20px;
-  color: white;
-}
-
-header a {
-  text-decoration: none;
-  color: white;
-  padding-left: 5px;
-  /* transition: all 0.3s ease 0s; */
-}
-
-header a:hover {
-  /* color: #b2dfdb; */
-  text-decoration: underline;
-}
-
 .imgTop {
   height: 20px;
 }

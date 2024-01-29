@@ -16,18 +16,29 @@
 
 </head>
 <body>
-    <header class="nib">
-            <ul>
-                <li><img src="icons\logo.png" class="logo"><a></a></li>
-                <li><img src="icons\phone.png" class="imgTop"><a>+918826275476</a></li>
-                <li><img src="icons\group-chat.png" class="imgTop"><a href="/team">Our Team </a></li>
-                <li><img src="icons\about.png" class="imgTop"><a href="/about">About Us</a></li>
-                <li><img src="icons\legal.png" class="imgTop"><a href="/blog">Legal Blog </a></li>
-                <li><img src="icons\student.png" class="imgTop"><a href="/student">Student’s Corner</a></li>
-                <li><img src="icons\lawyer.png" class="imgTop"><a href="/login">Login</a></li>
-            </ul>
-    </header>
+  <header>
+		<nav class="navigation nib">
 
+			<div class="logo">
+				<img src="icons\logo.png" class="logo">
+			</div>
+
+			<ul class="menu-list">
+				<li><img src="icons\phone.png" class="imgTop"><a>+918826275476</a></li>
+				<li><img src="icons\group-chat.png" class="imgTop"><a href="/team">Our Team </a></li>
+				<li><img src="icons\about.png" class="imgTop"><a href="/about">About Us</a></li>
+				<li><img src="icons\legal.png" class="imgTop"><a href="/blog">Legal Blog </a></li>
+				<li><img src="icons\student.png" class="imgTop"><a href="/student">Student’s Corner</a></li>
+        <li><img src="icons\lawyer.png" class="imgTop"><a href="/login">Login</a></li>
+			</ul>
+
+			<div class="humbarger">
+				<div class="bar"></div>
+				<div class="bar2 bar"></div>
+				<div class="bar"></div>
+			</div>
+		</nav>
+    </header>
 
     
     <div class="navb">
@@ -139,3 +150,29 @@
 <div class="container">
   
   <div><img class="bgimage" src="icons/real estate.jpg"></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+// Hamburger Toggle
+var hamburger = document.querySelector('.humbarger');
+var menuList = document.querySelector('.menu-list');
+
+hamburger.addEventListener('click', function(event) {
+    menuList.style.display = (menuList.style.display === 'none' || menuList.style.display === '') ? 'block' : 'none';
+    event.preventDefault();
+});
+
+// Menu Item Click
+var menuLinks = document.querySelectorAll('.menu-list li a');
+
+menuLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+        if (window.innerWidth < 768) {
+            menuList.style.display = 'none';
+            event.preventDefault();
+        }
+    });
+});
+
+});
+</script>
