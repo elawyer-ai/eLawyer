@@ -31,7 +31,7 @@
   z-index: 0;
   position: absolute;
   width: 85%;
-  color: #f9fbe7;
+  color: black;
   animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
@@ -43,7 +43,7 @@
 .headings {
   text-align: center;
   padding-top: 3%;
-  color: #f9fbe7;
+  color: black;
   font-family: 'EB Garamond', serif;
   animation: 1s ease-out 0s 1 slideInFromLeft;
 }

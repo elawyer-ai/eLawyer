@@ -23,6 +23,41 @@ const router = express.Router();
     res.render("family");
   });
 
+  
+  router.get("/criminal", (req,res) => {
+    res.render("criminal");
+  });
+
+
+  router.get("/corporate", (req,res) => {
+    res.render("corporate");
+  });
+
+
+  router.get("/govt", (req,res) => {
+    res.render("govt");
+  });
+
+
+  router.get("/civil", (req,res) => {
+    res.render("civil");
+  });
+
+
+  router.get("/property", (req,res) => {
+    res.render("property");
+  });
+  
+
+  
+  router.get("/case", (req,res) => {
+    res.render("case");
+  });
+
+  
+  router.get("/consult", (req,res) => {
+    res.render("consult");
+  });
 
 
 module.exports = router;
