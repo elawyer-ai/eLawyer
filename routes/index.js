@@ -1,29 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
-  router.get("/team", function(req,res){
+  router.get("/team", (req,res) => {
    res.render("team");
   });
 
-  router.get("/about", function(req,res){
+  router.get("/about", (req,res) => {
     res.render("about");
   });
 
 
-  router.get("/blog", function(req,res){
+  router.get("/blog", (req,res) => {
     res.render("blog");
   });
 
-
-  router.get("/student", function(req,res){
-    res.render("student");
-  });
-
-  router.get("/", function(req,res){
+  
+  router.get("/", (req,res) => {
     res.render("home");
   });
 
-  router.get("/family", function(req,res){
+  router.get("/family", (req,res) => {
     res.render("family");
   });
 

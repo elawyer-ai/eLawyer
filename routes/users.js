@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get("/login", function(req,res){
+router.get("/login", (req,res) => {
     res.render("login");
+  });
+
+  router.get("/lawyer", (req,res) => {
+    res.render("lawyer");
   });
 
 
@@ -12,9 +16,18 @@ router.get("/login", function(req,res){
   });
 
 
-  router.get("/registerL", function(req,res){
+  router.get("/registerL", (req,res) => {
     res.render("registerL");
   });
+
+  router.get("/userClient", (req,res) => {
+    res.render("userClient");
+  });
+
+  router.get("/userLawyer", (req,res) => {
+    res.render("userLawyer");
+  });
+
 
 
 module.exports = router;
