@@ -7,7 +7,7 @@ router.get("/login", function(req,res){
   });
 
 
-  router.get("/registerC", function(req,res){
+  router.get("/registerC", (req,res) => {
     res.render("registerC");
   });
 

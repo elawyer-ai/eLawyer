@@ -1,21 +1,22 @@
 <%- include("partials/header"); %>
 
 <% if (messages.error) { %>
-  <%= messages.error %>
-<% } %>
-
+  <div class="alert alert-danger">
+    <strong><%= messages.error %> </strong>
+  </div>
+<% } %> 
 
   <body>
     <div class="center">
       <h1>Login</h1>
       <form method="POST">
         <div class="txt_field">
-          <input type="email" id="email" required>
+          <input type="email" name="email" id="email" required>
           <span></span>
           <label>Email</label>
         </div>
         <div class="txt_field">
-          <input type="password" id="password" required>
+          <input type="password" name="password" id="password" required>
           <span></span>
           <label>Password</label>
         </div>
