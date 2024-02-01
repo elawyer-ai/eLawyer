@@ -13,18 +13,10 @@ const session = require("express-session");
 const initializePassport = require("./passport-config");
 initializePassport(
   passport,
-  (email) => users.find((user) => user.email === email),
-  (id) => users.find((user) => user.id === id)
-);
-
-const initializePassportClient = require("./passport-config");
-initializePassport(
-  passport,
   (email) => clients.find((user) => user.email === email),
   (id) => clients.find((user) => user.id === id)
 );
 
-const users = [];
 const clients = [];
 
 const app = express();
@@ -47,6 +39,7 @@ app.use(passport.session());
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/users"));
 
+
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/userClient",
     failureRedirect: "/login",
@@ -54,31 +47,7 @@ app.post("/login", passport.authenticate("local", {
   })
 );
 
-app.post("/lawyer", passport.authenticate("local", {
-    successRedirect: "/userLawyer",
-    failureRedirect: "/lawyer",
-    failureFlash: true,
-  })
-);
-
-app.post("/registerL", async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-    res.redirect("/lawyer");
-    return;
-  } catch {
-    res.redirect("/registerL");
-  }
-  console.log(users);
-});
-
-app.post("/registerc", async (req, res) => {
+app.post("/registerC", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     clients.push({
@@ -90,9 +59,9 @@ app.post("/registerc", async (req, res) => {
     res.redirect("/login");
     return;
   } catch {
-    res.redirect("/registerL");
+    res.redirect("/registerC");
   }
-  console.log(clients);
+  console.log(users);
 });
 
 
