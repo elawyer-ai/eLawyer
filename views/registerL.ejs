@@ -1,7 +1,5 @@
 <%- include("partials/header"); %>
 
-<h1 class="headings">Register as a Lawyer</h1>
-
 <body>
     <div class="center">
       <h1 class="login">Register</h1>
@@ -9,7 +7,7 @@
         <div class="txt_field">
           <input type="text" id="name" name="name" required>
           <span></span>
-          <label for="name">Username</label>
+          <label for="name">Name</label>
         </div>
         <div class="txt_field">
           <input type="email" id="email" name="email" required>
@@ -20,6 +18,16 @@
             <input type="password" id="password" name="password" required>
             <span></span>
             <label for="password">Password</label>
+          </div>
+          <div class="txt_field">
+            <input type="number" id="phone" name="phone" required>
+            <span></span>
+            <label for="phone">Phone</label>
+          </div>
+          <div class="txt_field">
+            <input type="number" id="copnum" name="copnum" required>
+            <span></span>
+            <label for="copnum">COP no.</label>
           </div>
         <input type="submit" value="Register">
         <div class="signup_link">

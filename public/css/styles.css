@@ -56,3 +56,16 @@
     transform: translateX(0);
   }
 }
+
+#pricing {
+  padding: 100px;
+}
+
+.pricing-text{
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+.pricing-col {
+  padding: 3% 2%;
+}

@@ -7,11 +7,12 @@
   background: #191d88;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
 }
 
 .center h1 {
   text-align: center;
-  padding: 20px 0;
+  padding: 10px 0;
   color: white;
   border-bottom: 1px solid silver;
 }
