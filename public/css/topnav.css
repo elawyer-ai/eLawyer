@@ -51,6 +51,8 @@ header .navigation .humbarger .bar{
 
 header .navigation .menu-list li a {
   color: white;
+  display: flex;
+  align-items: center;
   font-size: 1.25rem;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -128,4 +130,4 @@ header .navigation .menu-list li a:hover{
     top: 0;
     width: 100%;
   }
-  
+ 

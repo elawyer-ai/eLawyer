@@ -1,5 +1,5 @@
 <%- include("partials/header"); %>
-
+<br>
 <% if (messages.error) { %>
     <div class="alert alert-danger">
       <strong><%= messages.error %> </strong>
@@ -20,7 +20,6 @@
             <span></span>
             <label>Password</label>
           </div>
-          <div class="pass">Forgot Password?</div>
           <input type="submit" value="Login">
           <div class="signup_link">
             |<a href="/registerL">Register as a lawyer</a>|

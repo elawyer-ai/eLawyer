@@ -45,7 +45,7 @@ app.post("/login", passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
   })
-);
+);  
 
 app.post("/registerC", async (req, res) => {
   try {
