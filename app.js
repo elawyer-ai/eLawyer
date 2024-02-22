@@ -9,6 +9,8 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
+const lodash = require("lodash");
+
 
 const initializePassport = require("./passport-config");
 initializePassport(
@@ -18,8 +20,11 @@ initializePassport(
 );
 
 const clients = [];
+let posts = [];
 
 const app = express();
+const dash = lodash();
+
 
 app.set("view engine", "ejs");
 
@@ -47,6 +52,12 @@ app.post("/login", passport.authenticate("local", {
   })
 );  
 
+app.get("/userLawyer", (req,res) => {
+  res.render("userLawyer",{
+    newPost: posts 
+  });
+});
+
 app.post("/registerC", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -63,6 +74,41 @@ app.post("/registerC", async (req, res) => {
   }
   console.log(users);
 });
+
+app.post("/userClient", function(req,res){
+
+  const post = {
+  title: req.body.postTitle,
+  body: req.body.postBody,
+  phone: req.body.postPhone
+};
+
+posts.push(post);
+res.redirect("/");
+
+});
+
+app.get("/post/:topic", function(req,res){
+
+  const requestedTitle = dash.lowerCase(req.params.topic);
+
+
+  posts.forEach(function(post){
+
+    const storedTitle = dash.lowerCase(post.title);
+
+    if (storedTitle === requestedTitle) {
+      res.render("post",{
+        title: post.title,
+        content: post.body
+      });
+    } 
+
+
+  });
+
+});
+
 
 
 app.listen(3000, () => {

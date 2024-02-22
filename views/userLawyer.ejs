@@ -1,5 +1,13 @@
 <%- include("partials/header"); %>
-<br>
 <h1 class="headings">Hello lawyer</h1>
+
+
+<% newPost.forEach(function (post) { %>
+
+    <h1><%= post.title %></h1>
+    <h2><%= post.phone %></h2>
+    <p><%= post.body.substring(0,100) + "..." %> <a href="/post/<%= post.title %>">Read more</a> %></p>
+   
+   <% }); %>
 
 <%- include("partials/footer"); %>
