@@ -123,3 +123,11 @@
 		box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
 	}
 }
+
+hr{
+  border-style: dotted none none;
+  border-width: 5px;
+  border-color: #190482;
+  width: 8%;
+  margin: 7px auto;
+}

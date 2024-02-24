@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/login", (req,res) => {
     res.render("login");
-  });
+  });  
 
   router.get("/lawyer", (req,res) => {
     res.render("lawyer");
