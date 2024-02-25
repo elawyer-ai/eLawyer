@@ -28,6 +28,8 @@ const dash = lodash();
 
 const db = require('./config/keys').MongoURI;
 const User = require('./models/User')
+const Lawyer = require('./models/Lawyer')
+
 
 mongoose.connect(db, {useNewUrlParser: true})
  .then(() => console.log('MongoDB was connected..'))
@@ -135,6 +137,79 @@ app.post('/registerC', (req, res) => {
     });
   }
 })
+
+
+app.post('/registerL', (req, res) => {
+  const { name, email, password, phone, copnum } = req.body;
+  let errors = [];
+
+  if (!name || !email || !password || !phone || !copnum) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+
+  if (password.length < 6) {
+    errors.push({ msg: 'Password must be at least 6 characters' });
+  }
+
+  if (phone.length > 10) {
+    errors.push({ msg: 'Enter valid Phone' });
+  }
+  
+  if (copnum.length > 7) {
+    errors.push({ msg: 'Enter valid COP no.' });
+  }
+
+  if (errors.length > 0) {
+    res.render('registerL', {
+      errors,
+      name,
+      email,
+      password,
+      phone,
+      copnum
+    });
+  } else {
+    Lawyer.findOne({ email: email }).then(user => {
+      if (user) {
+        errors.push({ msg: 'Email already exists' });
+        res.render('registerL', {
+          errors,
+          name,
+          email,
+          password,
+          phone,
+          copnum
+        });
+      } else {
+        const newLawyer = new Lawyer({
+          name,
+          email,
+          password,
+          phone,
+          copnum
+        });
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newLawyer.password, salt, (err, hash) => {
+            if (err) throw err;
+            newLawyer.password = hash;
+            newLawyer
+              .save()
+              .then(user => {
+                req.flash(
+                  'success_msg',
+                  'You are now registered and can log in'
+                );
+                res.redirect('/lawyer');
+              })
+              .catch(err => console.log(err));
+          });
+        });
+      }
+    });
+  }
+})
+
 
 app.post("/userClient", function(req,res){
 
