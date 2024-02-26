@@ -94,7 +94,7 @@
 }
 
 .whatsapp{
-  margin-top: 2%;
+  margin-bottom: 5%;
 	background: white;
 	box-shadow: 0 0 0 0 #25D366;
 	animation: pulse-green 1.5s infinite;
@@ -130,4 +130,17 @@ hr{
   border-color: #190482;
   width: 8%;
   margin: 7px auto;
+}
+
+.homeLogo{
+    margin-left: 66%;
+    margin-top: 6%;
+    border-radius: 10px;
+    width: 60%;
+
+}
+
+.topHome{
+  display: flex;
+  align-items: center;
 }
