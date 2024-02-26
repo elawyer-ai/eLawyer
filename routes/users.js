@@ -10,27 +10,13 @@ const Lawyer = require('../models/Lawyer')
 
 
 
+
 const { forwardAuthenticated } = require('../config/auth');
 const { ensureAuthenticated } = require('../config/auth');
 
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
 router.get('/registerC', forwardAuthenticated, (req, res) => res.render('registerC'));
-
-// require("../pass-port-config")(passport);
-
-// router.use(passport.initialize());
-// router.use(passport.session());
-
-
-// router.get("/login", (req,res) => {
-//     res.render("login");
-//   });  
-
-
-// router.get("/registerC", (req,res) => {
-//   res.render("registerC");
-// });
 
   router.get("/lawyer", (req,res) => {
     res.render("lawyer");
@@ -123,76 +109,51 @@ router.get('/registerC', forwardAuthenticated, (req, res) => res.render('registe
   })
 
 
-  router.post('/registerL', (req, res) => {
-    const { name, email, password, phone, copnum } = req.body;
-    let errors = [];
-  
-    if (!name || !email || !password || !phone || !copnum) {
-      errors.push({ msg: 'Please enter all fields' });
+  router.post("/registerL", async (req, res) => {
+
+    const data = {
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password,
+        phone: req.body.phone,
+        copnum: req.body.copnum
     }
-  
-    if (password.length < 6) {
-      errors.push({ msg: 'Password must be at least 6 characters' });
-    }
-  
-    if (phone.length > 10) {
-      errors.push({ msg: 'Enter valid Phone' });
-    }
-    
-    if (copnum.length > 7) {
-      errors.push({ msg: 'Enter valid COP no.' });
-    }
-  
-    if (errors.length > 0) {
-      res.render('registerL', {
-        errors,
-        name,
-        email,
-        password,
-        phone,
-        copnum
-      });
+
+    const existingUser = await Lawyer.findOne({ email: data.email });
+
+    if (existingUser) {
+        res.send('User already exists. Please choose a different username.');
     } else {
-      Lawyer.findOne({ email: email }).then(user => {
-        if (user) {
-          errors.push({ msg: 'Email already exists' });
-          res.render('registerL', {
-            errors,
-            name,
-            email,
-            password,
-            phone,
-            copnum
-          });
-        } else {
-          const newLawyer = new Lawyer({
-            name,
-            email,
-            password,
-            phone,
-            copnum
-          });
-  
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newLawyer.password, salt, (err, hash) => {
-              if (err) throw err;
-              newLawyer.password = hash;
-              newLawyer
-                .save()
-                .then(user => {
-                  req.flash(
-                    'success_msg',
-                    'You are now registered and can log in'
-                  );
-                  res.redirect('/lawyer');
-                })
-                .catch(err => console.log(err));
-            });
-          });
-        }
-      });
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(data.password, saltRounds);
+
+        data.password = hashedPassword;
+
+        // const userdata = await Lawyer.insertMany(data);
+        // console.log(userdata);
+        res.redirect('/lawyer');
     }
-  })
+
+});
+
+router.post("/lawyer", async (req, res) => {
+    try {
+        const check = await Lawyer.findOne({ email: req.body.email });
+        if (!check) {
+            res.send("User name cannot found")
+        }
+        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
+        if (!isPasswordMatch) {
+            res.send("wrong Password");
+        }
+        else {
+            res.redirect('/userLawyer');
+        }
+    }
+    catch {
+        res.send("wrong Details");
+    }
+});
 
   router.get('/logout', (req, res) => {
     req.logout(function(err) {

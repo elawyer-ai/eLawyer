@@ -12,8 +12,8 @@ const session = require("express-session");
 const lodash = require("lodash");
 const mongoose = require("mongoose");
 
-
 require("./passport-config")(passport);
+
 
 
 let posts = [];
@@ -103,6 +103,8 @@ app.get("/post/:topic", function(req,res){
   });
 
 });
+
+
 
 const PORT = process.env.PORT || 3000
 
