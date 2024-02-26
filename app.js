@@ -13,22 +13,15 @@ const lodash = require("lodash");
 const mongoose = require("mongoose");
 
 
-const initializePassport = require("./passport-config");
-initializePassport(
-  passport,
-  (email) => clients.find((user) => user.email === email),
-  (id) => clients.find((user) => user.id === id)
-);
+require("./passport-config")(passport);
 
-const clients = [];
+
 let posts = [];
 
 const app = express();
 const dash = lodash();
 
 const db = require('./config/keys').MongoURI;
-const User = require('./models/User')
-const Lawyer = require('./models/Lawyer')
 
 
 mongoose.connect(db, {useNewUrlParser: true})
@@ -53,163 +46,29 @@ app.use(passport.session());
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/users"));
 
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
-app.post("/login", passport.authenticate("local", {
-    successRedirect: "/userClient",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-);  
+
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/userClient',
+    failureRedirect: '/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
+
 
 app.get("/userLawyer", (req,res) => {
   res.render("userLawyer",{
     newPost: posts 
   });
 }); 
-
-app.post('/registerC', (req, res) => {
-  const { name, email, password, phone, pincode } = req.body;
-  let errors = [];
-
-  if (!name || !email || !password || !phone || !pincode) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-
-  if (password.length < 6) {
-    errors.push({ msg: 'Password must be at least 6 characters' });
-  }
-
-  if (phone.length > 10) {
-    errors.push({ msg: 'Enter valid Phone' });
-  }
-  
-  if (pincode.length > 7) {
-    errors.push({ msg: 'Enter valid Pincode' });
-  }
-
-  if (errors.length > 0) {
-    res.render('registerC', {
-      errors,
-      name,
-      email,
-      password,
-      phone,
-      pincode
-    });
-  } else {
-    User.findOne({ email: email }).then(user => {
-      if (user) {
-        errors.push({ msg: 'Email already exists' });
-        res.render('registerC', {
-          errors,
-          name,
-          email,
-          password,
-          phone,
-          pincode
-        });
-      } else {
-        const newUser = new User({
-          name,
-          email,
-          password,
-          phone,
-          pincode
-        });
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('/login');
-              })
-              .catch(err => console.log(err));
-          });
-        });
-      }
-    });
-  }
-})
-
-
-app.post('/registerL', (req, res) => {
-  const { name, email, password, phone, copnum } = req.body;
-  let errors = [];
-
-  if (!name || !email || !password || !phone || !copnum) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-
-  if (password.length < 6) {
-    errors.push({ msg: 'Password must be at least 6 characters' });
-  }
-
-  if (phone.length > 10) {
-    errors.push({ msg: 'Enter valid Phone' });
-  }
-  
-  if (copnum.length > 7) {
-    errors.push({ msg: 'Enter valid COP no.' });
-  }
-
-  if (errors.length > 0) {
-    res.render('registerL', {
-      errors,
-      name,
-      email,
-      password,
-      phone,
-      copnum
-    });
-  } else {
-    Lawyer.findOne({ email: email }).then(user => {
-      if (user) {
-        errors.push({ msg: 'Email already exists' });
-        res.render('registerL', {
-          errors,
-          name,
-          email,
-          password,
-          phone,
-          copnum
-        });
-      } else {
-        const newLawyer = new Lawyer({
-          name,
-          email,
-          password,
-          phone,
-          copnum
-        });
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newLawyer.password, salt, (err, hash) => {
-            if (err) throw err;
-            newLawyer.password = hash;
-            newLawyer
-              .save()
-              .then(user => {
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('/lawyer');
-              })
-              .catch(err => console.log(err));
-          });
-        });
-      }
-    });
-  }
-})
-
 
 app.post("/userClient", function(req,res){
 
