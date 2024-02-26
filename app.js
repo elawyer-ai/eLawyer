@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
