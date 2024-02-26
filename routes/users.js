@@ -11,8 +11,10 @@ const Lawyer = require('../models/Lawyer')
 
 
 
-const { forwardAuthenticated } = require('../config/auth');
-const { ensureAuthenticated } = require('../config/auth');
+const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
+
+
+
 
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
@@ -25,7 +27,7 @@ router.get('/registerC', forwardAuthenticated, (req, res) => res.render('registe
 
 
 
-  router.get("/registerL", (req,res) => {
+  router.get("/registerL",  (req,res) => {
     res.render("registerL");
   });
 

@@ -66,7 +66,7 @@ app.post('/login', (req, res, next) => {
 
 app.get("/userLawyer", (req,res) => {
   res.render("userLawyer",{
-    newPost: posts 
+    newPost: posts ,
   });
 }); 
 
