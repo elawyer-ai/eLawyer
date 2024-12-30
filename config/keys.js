@@ -1,5 +1,5 @@
 
-dbpassword = 'mongodb+srv://vaibhav05:himymother@cluster0.knilwe4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+dbpassword = 'mongodb+srv://elawyerservices:Maxmullar@7@cluster0.e9ye5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 
 module.exports = {
